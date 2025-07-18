@@ -1,3 +1,5 @@
+
 from django.shortcuts import render
 
-# Create your views here.
+def admission_dashboard(request):
+    return render(request, 'admissions/dashboard.html')

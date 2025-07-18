@@ -1,3 +1,6 @@
+
 from django.shortcuts import render
 
-# Create your views here.
+def pharmacy_home(request):
+    return render(request, 'pharmacy/home.html')  # adjust the path if needed
+

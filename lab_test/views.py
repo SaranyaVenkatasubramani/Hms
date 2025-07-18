@@ -1,3 +1,5 @@
+
 from django.shortcuts import render
 
-# Create your views here.
+def lab_tests(request):
+    return render(request, 'lab_test/lab.html')
