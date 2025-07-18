@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #dbefff, #a9d6f4);
+    }
+
+    .overlay {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .payment-box {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 600px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+
+    .payment-box h4 {
+      font-size: 28px;
+      margin-bottom: 25px;
+    }
+
+    .form-check-label, .text-muted, .text-end {
+      font-size: 18px;
+    }
+
+    .form-check {
+      margin-bottom: 20px;
+    }
+
+    .promo {
+      margin-top: 30px;
+    }
+
+    .btn-yellow {
+      background-color: #ffe600;
+      color: black;
+      font-weight: bold;
+      padding: 14px;
+      font-size: 18px;
+      border-radius: 8px;
+    }
+
+    .btn-yellow:hover {
+      background-color: #ffdd00;
+    }
+
+    @media (max-width: 576px) {
+      .payment-box {
+        padding: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="overlay">
+  <div class="payment-box">
+    <h4>Select a Payment Method</h4>
+    <p class="text-end fw-bold text-primary">Total Fee: <span class="text-dark">$77</span></p>
+
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="paymentMethod" id="upiOption" checked>
+      <label class="form-check-label" for="upiOption">
+        Pay by any UPI app <span class="text-muted ms-1">(Google Pay, PhonePe, Paytm and more)</span>
+        <alt="UPI" style="height: 25px;" class="ms-2">
+      </label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="paymentMethod" id="cardOption">
+      <label class="form-check-label" for="cardOption">
+        Add a new credit or debit card
+      </label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="paymentMethod" id="cashOption">
+      <label class="form-check-label" for="cashOption">
+        Cash on Visit <span class="text-muted">(Cash, UPI and Cards are accepted)</span>
+      </label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="paymentMethod" id="netBanking">
+      <label class="form-check-label" for="netBanking">
+        Net Banking
+      </label>
+    </div>
+
+    <div class="promo">
+      <a href="#" class="text-decoration-underline text-primary">Add Gift Cards or Promo Code</a>
+      <p class="text-muted" style="font-size: 16px;">including GST & other taxes</p>
+    </div>
+
+    <button class="btn btn-yellow w-100 mt-3" onclick="goToAppointment()">Proceed Payment</button>
+  </div>
+</div>
+
+<script>
+  function goToAppointment() {
+    window.location.href = "appointment.html";
+  }
+</script>
+</body>
+</html>
+
