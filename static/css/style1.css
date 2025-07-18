@@ -31,12 +31,13 @@ body {
 
     /* Hero Section with background image */
     .hero-section {
-      background: url('front.jpg') no-repeat center center/cover;
-      position: relative;
-      padding: 120px 0;
-      color: white;
-      min-height: 700px;
-    }
+  background: url("../images/front.jpg") no-repeat center center/cover;
+  position: relative;
+  padding: 120px 0;
+  color: white;
+  min-height: 700px;
+}
+
 
     .hero-section::before {
       content: "";
