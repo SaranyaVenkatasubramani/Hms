@@ -4,13 +4,13 @@ def homepage(request):
     return render(request, 'index.html')
 
 def login(request):
-    return render(request, 'login/login.html')
+    return render(request, 'login.html')
 
 def signup(request):
-    return render(request, 'signup/signup.html')
+    return render(request, 'signup.html')
 
 def forgot_password(request):
-    return render(request,'fpass/fpass.html')
+    return render(request,'fpass.html')
 
 def settings(request):
     return render(request,'settings/settings.html')

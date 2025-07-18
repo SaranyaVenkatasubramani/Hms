@@ -50,7 +50,8 @@ body {
 }
 
 .right-image {
-  background: url('login.jpg') no-repeat center center;
+  background: url('../images/login.jpg') no-repeat center center;
+
   background-size: cover;
   height: 100vh;
 }
