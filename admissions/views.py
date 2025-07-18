@@ -1,5 +1,8 @@
 
 from django.shortcuts import render
 
-def admission_dashboard(request):
-    return render(request, 'admissions/dashboard.html')
+def doc_dashboard(request):
+    return render(request, 'docdashboard.html')
+def appointment(request):
+    return render(request,'appointlist.html')
+    

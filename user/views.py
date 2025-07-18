@@ -13,5 +13,5 @@ def forgot_password(request):
     return render(request,'fpass.html')
 
 def settings(request):
-    return render(request,'settings/settings.html')
+    return render(request,'settings.html')
 
