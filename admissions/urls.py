@@ -1,7 +1,14 @@
 
+
 from django.urls import path
-from .views import admission_dashboard
+from . import views  
 
 urlpatterns = [
-    path('admissions', admission_dashboard, name='admissions-dashboard'),
+    path('', views.doc_dashboard, name='docdashboard'), 
+    path('appointlist/',views.appointment,name='appointment'), # Loads at /admissions/
 ]
+
+
+
+
+

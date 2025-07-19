@@ -19,7 +19,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('user.urls')),  # ✅ Replace 'myapp' with your actual app name         
+    path('', include('user.urls')),          
     path('pharmacy/', include('pharmacy.urls')),
     path('admissions/', include('admissions.urls')),
     path('lab/', include('lab_test.urls')),
