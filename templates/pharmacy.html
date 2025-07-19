@@ -1,31 +1,29 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
   <title>Pharmacy</title>
   <style>
     body {
-  margin: 0;
-  height: 100vh; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: Arial, sans-serif;
-  background-image: url('doc.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-}
-
+      margin: 0;
+      height: 100vh; 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background-image: url('{% static "images/doc.jpg" %}');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
 
     .main-container {
-  width: 700px; /* Wider */
-  padding: 40px; /* More internal space */
-  background-color: rgba(163, 210, 243, 0.95);
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
-}
-
-
+      width: 700px;
+      padding: 40px;
+      background-color: rgba(163, 210, 243, 0.95);
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
 
     .header {
       background-color: white;
@@ -148,7 +146,6 @@
       border-radius: 4px;
       cursor: pointer;
     }
-
   </style>
 </head>
 <body>
@@ -162,7 +159,7 @@
 
     <!-- Logo & Welcome -->
     <div class="logo-bar">
-      <img src="doc.logo.jpg" alt="Doctor Logo">
+      <img src="{% static 'images/doc.logo.jpg' %}" alt="Doctor Logo">
       <h1>Welcome to InstaCare</h1>
     </div>
 
@@ -184,7 +181,7 @@
         <thead>
           <tr>
             <th>Drug Name</th>
-            <th>Quality</th>
+            <th>Quantity</th>
           </tr>
         </thead>
         <tbody>
