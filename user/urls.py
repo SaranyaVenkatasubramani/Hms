@@ -11,9 +11,14 @@ urlpatterns = [
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name='password_reset_form.html'),name='password_reset'),
     path('password_reset/done/',auth_views.PasswordResetDoneView.as_view(template_name='password_reset_done.html'),name='password_reset_done'),
     path('settings/',views.settings,name='settings'),
+<<<<<<< HEAD
     path('dashboard/', views.redirect_user_dashboard, name='redirect_dashboard')
 
 
+=======
+
+    
+>>>>>>> 89978ea305ac7f8467b0fd45cab9d2b5779df653
 ]
 
 
