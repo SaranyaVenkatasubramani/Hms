@@ -7,4 +7,3 @@ def book(request):
     return render(request,'book.html')
 
 
-
