@@ -8,13 +8,13 @@ body {
 
     /* Navbar */
     .navbar {
-      background-color: white !important;
+      background-color:  #ABD9F1 !important;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       padding: 15px 0;
     }
 
     .navbar .logo span {
-      color:  #003366;
+      color:  black;
       font-weight: 700;
       font-size: 1.5rem;
     }
@@ -26,7 +26,7 @@ body {
 
     .navbar .nav-link:hover,
     .navbar .nav-link.active {
-      color: #00336689 !important;
+      color: gray !important;
     }
 
     /* Hero Section with background image */

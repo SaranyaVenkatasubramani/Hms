@@ -15,3 +15,6 @@ def forgot_password(request):
 def settings(request):
     return render(request,'settings/settings.html')
 
+def patient_dashboard(request):
+    return render(request,'patient_dashboard.html')
+
