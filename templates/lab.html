@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,7 +7,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: url('doc.jpg') no-repeat center center fixed;
+      background: url('{% static "images/doc.jpg" %}') no-repeat center center fixed;
       background-size: cover;
       margin: 0;
       padding: 0;
@@ -122,7 +124,7 @@
   <!-- Header -->
   <div class="header">
     <div class="branding">
-      <img src="doc.logo.jpg" alt=" Logo" />
+      <img src="{% static 'images/doc.logo.jpg' %}" alt="Logo" />
       WELCOME TO INSTACARE
     </div>
     <div class="header-title">☰ Lab Module</div>
@@ -132,26 +134,28 @@
     <!-- Form Section -->
     <div class="container">
       <h2>Create Lab Test</h2>
-      <form>
-        <label>Patient</label>
-        <select>
+      <form method="POST">
+        {% csrf_token %}
+
+        <label for="patient">Patient</label>
+        <select name="patient" id="patient">
           <option>Mary Alien</option>
           <option>Harold Green</option>
           <option>Joseph Clark</option>
         </select>
 
-        <label>Test Name</label>
-        <select>
+        <label for="test_name">Test Name</label>
+        <select name="test_name" id="test_name">
           <option>Blood Test</option>
           <option>X-Ray</option>
           <option>MRI</option>
         </select>
 
-        <label>Cost</label>
-        <input type="text" placeholder="$">
+        <label for="cost">Cost</label>
+        <input type="text" name="cost" placeholder="$">
 
-        <label>Date</label>
-        <input type="date">
+        <label for="date">Date</label>
+        <input type="date" name="date">
 
         <button type="submit">Create</button>
       </form>
