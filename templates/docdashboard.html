@@ -9,7 +9,7 @@
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
     body {
-      background: url("{% static 'doctor_dashboard/bg2.jpg' %}") center/cover no-repeat fixed; 
+      background: url("/static/images/bg2.jpg") center/cover no-repeat fixed; 
       overflow-x: hidden;
       font-family: 'Segoe UI', sans-serif;
     }
@@ -51,7 +51,7 @@
     .main {
       flex: 1;
       padding: 30px;
-      background: url("{% static 'doctor_dashboard/bg2.jpg' %}") center/cover no-repeat fixed; 
+      background: url("/static/images/bg2.jpg") center/cover no-repeat fixed; 
     }
 
     .topbar {
@@ -156,7 +156,7 @@
   <div class="dashboard-container">
     <!-- Sidebar -->
     <div class="sidebar text-center">
-      <img src="{% static 'doctor_dashboard/doc.avif' %}" class="profile-img" />
+      <img src="{% static 'images/doc.avif' %}" class="profile-img" />
       <h4>Dr.Beryl</h4>
       <p>Mbbs, DGO</p>
       <br />
@@ -167,7 +167,6 @@
       <a href="#"><i class="fas fa-wallet"></i> 💳 Payment</a>
       <a href="#"><i class="fas fa-user-circle"></i> 👤 Profile</a>
       <a href="#"><i class="fas fa-cog"></i> ⚙️ Settings</a>
-      <br /><br /><br /><br /><br />
       <a href="#"><i class="fas fa-sign-out-alt"></i> 🚪 Logout</a>
     </div>
 
@@ -197,7 +196,7 @@
 
       <div class="chart-section text-center">
         <h5>Patients Summary July 2025</h5>
-        <img src="{% static 'doctor_dashboard/pie-chart.png' %}" alt="Chart" />
+        <img src="{% static 'images/pie-chart.png' %}" alt="Chart" />
         <div class="legend-box mt-3">
           <div><span style="background-color: #f5a623;"></span> Total Patients</div>
           <div><span style="background-color: #add8e6;"></span> Old Patients</div>
@@ -208,7 +207,7 @@
       <div class="appointment-requests">
         <h5>Appointment Request</h5>
         <div class="patient-item">
-          <img src="{% static 'doctor_dashboard/pat3.avif' %}" />
+          <img src="{% static 'images/pat3.avif' %}" />
           <div class="patient-name">
             <strong>Shine .J ✅ ❌</strong>
             <small>Cold</small>
@@ -219,7 +218,7 @@
           </div>
         </div>
         <div class="patient-item">
-          <img src="{% static 'doctor_dashboard/pat2.jpg' %}" />
+          <img src="{% static 'images/pat2.jpg' %}" />
           <div class="patient-name">
             <strong>vaishu.D ✅ ❌</strong>
             <small>Over Sweating</small>
@@ -230,7 +229,7 @@
           </div>
         </div>
         <div class="patient-item">
-          <img src="{% static 'doctor_dashboard/pat1.avif' %}" />
+          <img src="{% static 'images/pat1.avif' %}" />
           <div class="patient-name">
             <strong>samuel.V ✅ ❌</strong>
             <small>Vomiting</small>

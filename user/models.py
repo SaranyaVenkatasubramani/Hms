@@ -4,6 +4,18 @@ from django.contrib.auth.models import AbstractUser
 class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
     is_active = models.BooleanField(default=True)
+    ROLE_CHOICES = [
+        ('superadmin', 'Super Admin'),
+        ('receptionist', 'Receptionist'),
+        ('doctor', 'Doctor'),
+        ('labtech', 'Lab Technician'),
+        ('pharmacist', 'Pharmacist'),
+        ('patient', 'Patient'),
+    ]
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='patient')
+
+    def __str__(self):
+        return self.username
 
 class UserProfile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)

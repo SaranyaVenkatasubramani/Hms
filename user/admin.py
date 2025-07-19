@@ -1,16 +1,17 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import CustomUser, UserProfile
+from django.contrib.auth.models import Group
 
-# Use Django's built-in UserAdmin to handle CustomUser
 @admin.register(CustomUser)
-class CustomUserAdmin(UserAdmin):
+class CustomUserAdmin(BaseUserAdmin):
+   class CustomUserAdmin(BaseUserAdmin):  
     model = CustomUser
-    list_display = ('username', 'email', 'is_staff', 'is_active')
-    search_fields = ('username', 'email')
-    ordering = ('username',)
+    list_display = ['username', 'email', 'role', 'is_staff']
+ 
+admin.site.unregister(Group)  
 
-# Register UserProfile with custom admin config
+
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'phone', 'emergency_contact', 'qr_code')
