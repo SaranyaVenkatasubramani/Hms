@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pharmacy Management</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">🏥 Pharmacy Module</h2>
+
+    <!-- Inventory Section -->
+    <div class="card mb-4">
+        <div class="card-header bg-success text-white">Inventory</div>
+        <div class="card-body">
+            <table class="table table-bordered table-striped">
+                <thead class="table-light">
+                    <tr>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Expiry Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in inventory %}
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.expiry_date|date:"Y-m-d H:i" }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="3" class="text-center">No items in inventory.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Dispensed Medicines Section -->
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">Dispensed Medicines</div>
+        <div class="card-body">
+            <table class="table table-bordered table-striped">
+                <thead class="table-light">
+                    <tr>
+                        <th>Prescription ID</th>
+                        <th>Medicine</th>
+                        <th>Quantity</th>
+                        <th>Dispensed Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for med in prescriptions %}
+                    <tr>
+                        <td>{{ med.prescription_id }}</td>
+                        <td>{{ med.pharmacy_item.name }}</td>
+                        <td>{{ med.quantity_dispensed }}</td>
+                        <td>{{ med.dispensed_date|date:"Y-m-d H:i" }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="4" class="text-center">No medicines dispensed.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Add Inventory Form -->
+    <div class="card mb-4">
+        <div class="card-header bg-warning">Add Inventory Item</div>
+        <div class="card-body">
+            <form method="POST" action="{% url 'add-inventory' %}">
+                {% csrf_token %}
+                {{ inventory_form.as_p }}
+                <button type="submit" class="btn btn-success">Add Item</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dispense Medicine Form -->
+    <div class="card mb-4">
+        <div class="card-header bg-info">Dispense Medicine</div>
+        <div class="card-body">
+            <form method="POST" action="{% url 'dispense-medicine' %}">
+                {% csrf_token %}
+                {{ dispense_form.as_p }}
+                <button type="submit" class="btn btn-primary">Dispense</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

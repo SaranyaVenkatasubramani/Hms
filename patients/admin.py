@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Patient, Appointment
+from .models import Patient
 
-admin.site.register(Patient)
-admin.site.register(Appointment)
+@admin.register(Patient)
+class PatientAdmin(admin.ModelAdmin):
+    search_fields = ['full_name']
+
