@@ -3,6 +3,7 @@ from django.contrib.auth import login as auth_login, authenticate, logout
 from .forms import SignUpForm, LoginForm
 from .models import CustomUser
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 def homepage(request):
     return render(request, 'index.html')
@@ -61,6 +62,8 @@ def forgot_password(request):
 def settings(request):
     return render(request,'settings.html')
 
-def patient_dashboard(request):
-    return render(request,'patient_dashboard.html')
+def logout_view(request):
+    logout(request)
+    return redirect('homepage')  
+
 

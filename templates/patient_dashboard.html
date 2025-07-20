@@ -28,12 +28,11 @@
         <span>INSTACARE</span>
       </div>
       <ul class="nav d-none d-lg-flex">
-        <li class="nav-item"><a href="#" class="nav-link active">HOME</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">ABOUT</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">DEPARTMENTS</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">DOCTORS</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">BLOG</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">CONTACT</a></li>
+        <li class="nav-item"><a href="{% url 'patient_dashboard' %}" class="nav-link active">HOME</a></li>
+        <li class="nav-item"><a href="{% url 'doctor' %}" class="nav-link"> DOCTORS</a></li>
+        <li class="nav-item"><a href="{% url 'appointment_dashboard' %}" class="nav-link">MY APPOINTMENTS</a></li>
+        <li class="nav-item"><a href="{% url 'settings' %}" class="nav-link">SETTINGS</a></li>
+        <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">LOGOUT</a>
       </ul>
     </div>
   </nav>
@@ -108,17 +107,23 @@
 
   <!-- Bottom Navigation -->
   <footer class="bottom-nav">
-    <a href="#" class="nav-item active">
+    <a href="{% url 'patient_dashboard'%}" class="nav-item active">
       <i class="fas fa-home fs-4"></i>
       <div class="small">Home</div>
     </a>
-    <a href="#" class="nav-item">
-      <i class="fas fa-bell fs-4"></i>
-      <div class="small">Notifications</div>
+    <a href="{% url 'appointment_dashboard'%}" class="nav-item">
+      <i class="fa-solid fa-calendar-check fs-4"></i>
+
+      <div class="small">Appointments</div>
     </a>
-    <a href="#" class="nav-item">
+    <a href="{%url 'settings'%}" class="nav-item">
       <i class="fas fa-cog fs-4"></i>
       <div class="small">Settings</div>
+    </a>
+    <a href="{%url 'logout'%}" class="nav-item">
+      <i class="fa-solid fa-right-from-bracket fs-4"></i>
+
+      <div class="small">Logout</div>
     </a>
   </footer>
 
