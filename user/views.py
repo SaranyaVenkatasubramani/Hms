@@ -16,7 +16,7 @@ def user_login(request):
 
         if user is not None:
             auth_login(request, user)
-            return redirect('redirect_dashboard')  # sends to /dashboard/
+            return redirect('redirect_dashboard') 
         else:
             return render(request, 'login.html', {'error': 'Invalid credentials'})
 
@@ -47,9 +47,9 @@ def redirect_user_dashboard(request):
     elif user.role == 'doctor':
         return render(request, 'docdashboard.html')
     elif user.role == 'labtech':
-        return render(request, 'dashboards/lab_dashboard.html')
+        return render(request, 'lab.html')
     elif user.role == 'pharmacist':
-        return render(request, 'dashboards/pharmacy_dashboard.html')
+        return render(request, 'pharmacy.html')
     elif user.role == 'patient':
         return render(request, 'patient_dashboard.html')
     else:

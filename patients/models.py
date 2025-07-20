@@ -10,9 +10,17 @@ class Patient(models.Model):
     medical_history = models.TextField()
     qr_code = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.full_name
+
 class Appointment(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     scheduled_time = models.TimeField()
     status = models.CharField(max_length=50)
     video_link = models.URLField()
+
+    def __str__(self):
+        return f"Appointment for {self.patient.full_name} at {self.scheduled_time}"
+
+
 
