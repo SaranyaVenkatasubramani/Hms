@@ -1,3 +1,4 @@
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -10,149 +11,93 @@
   <link rel="stylesheet" href="{% static 'css/style4.css' %}">
 </head>
 <body>
-       <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg">
-    <div class="container d-flex justify-content-between align-items-center">
-      <div class="d-flex align-items-center logo">
-        <img src="{% static 'images/logo.png' %}" alt="Logo" style="height: 40px; margin-right: 10px;" />
-        <span>INSTACARE</span>
-      </div>
-      <ul class="nav d-none d-lg-flex">
-          <li class="nav-item"><a href="{% url 'patient_dashboard' %}" class="nav-link">HOME</a></li>
-        <li class="nav-item"><a href="{% url 'doctor' %}" class="nav-link active"> DOCTORS</a></li>
-        <li class="nav-item"><a href="{% url 'appointment_dashboard' %}" class="nav-link">MY APPOINTMENTS</a></li>
-         <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">LOGOUT</a>
 
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center logo">
+      <img src="{% static 'images/logo.png' %}" alt="Logo" style="height: 40px; margin-right: 10px;" />
+      <span>INSTACARE</span>
     </div>
-  </nav>
-    <div class="container-fluid p-0 d-flex justify-content-center">
+    <ul class="nav d-none d-lg-flex">
+      <li class="nav-item"><a href="{% url 'patient_dashboard' %}" class="nav-link">HOME</a></li>
+      <li class="nav-item"><a href="{% url 'doctor' %}" class="nav-link active">DOCTORS</a></li>
+      <li class="nav-item"><a href="{% url 'appointment_dashboard' %}" class="nav-link">MY APPOINTMENTS</a></li>
+      <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">LOGOUT</a></li>
+    </ul>
+  </div>
+</nav>
 
-
-    
-    <div class="app-container">
-    <!-- Filter Section -->
-      <section class="d-flex justify-content-between align-items-center p-3 border-bottom bg-light filter-section">
-        <div class="text-secondary fw-semibold">
-          3 Doctors Found
-        </div>
-        <i class="fas fa-sliders-h fs-5 text-secondary"></i>
-      </section>
-
-      <!-- Doctor List -->
-      <main class="doctor-list p-3">
-        <!-- Doctor Card -->
-        <div class="card mb-3 shadow-sm rounded-3">
-          <div class="card-body">
-            <div class="d-flex align-items-start mb-3">
-              <img src="{% static 'images/zara.png' %}" alt="Dr. Zara Nguyen" class="rounded-circle me-3 doctor-img">
-              <div class="flex-grow-1">
-                <h5 class="card-title mb-1 fw-bold">Dr. Zara Nguyen</h5>
-                <p class="card-text text-muted mb-2">Gynaecologist (5 years Exp)</p>
-                <div class="d-flex align-items-center rating">
-                  <i class="fas fa-star filled me-1"></i>
-                  <i class="fas fa-star filled me-1"></i>
-                  <i class="fas fa-star filled me-1"></i>
-                  <i class="fas fa-star half-filled me-1"></i>
-                  <span class="fw-bold text-dark">3.5</span>
-                </div>
-              </div>
-            </div>
-            <hr class="my-3 border-dashed">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <div>
-                <div class="text-success fw-bold">Available Now</div>
-                <div class="d-flex align-items-center text-muted fs-6">
-                  <i class="fas fa-video text-success me-1"></i>
-                  <span>Video Consult</span>
-                </div>
-              </div>
-              <div class="text-end">
-                <div class="fw-bold fs-5 text-dark">$70.00</div>
-                <div class="text-muted fs-7">Consultation fees</div>
-              </div>
-            </div>
-            <a href="{% url 'book' %}" class="btn btn-primary w-100 fw-bold py-2 rounded-3">Book appointment</a>
-
-          </div>
-        </div>
-
-         <main class="doctor-list p-3">
-        <!-- Doctor Card -->
-        <div class="card mb-3 shadow-sm rounded-3">
-          <div class="card-body">
-            <div class="d-flex align-items-start mb-3">
-              <img src="{% static 'images/maria.png' %}" alt="Dr. Maria Lexa" class="rounded-circle me-3 doctor-img">
-              <div class="flex-grow-1">
-                <h5 class="card-title mb-1 fw-bold">Dr. Maria Lexa</h5>
-                <p class="card-text text-muted mb-2">Gynaecologist (8 years Exp)</p>
-                <div class="d-flex align-items-center rating">
-                  <i class="fas fa-star filled me-1"></i>
-                  <i class="fas fa-star filled me-1"></i>
-                  <i class="fas fa-star filled me-1"></i>
-                  <i class="fas fa-star filled me-1"></i>
-                  <i class="fas fa-star half-filled me-1"></i>
-                  <span class="fw-bold text-dark">4.5</span>
-                </div>
-              </div>
-            </div>
-            <hr class="my-3 border-dashed">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <div>
-                <div class="text-danger fw-bold">Not Available Now</div>
-                <div class="d-flex align-items-center text-muted fs-6">
-                  <i class="fas fa-video text-danger me-1"></i>
-                  <span>Video Consult</span>
-                </div>
-              </div>
-              <div class="text-end">
-                <div class="fw-bold fs-5 text-dark">$80.00</div>
-                <div class="text-muted fs-7">Consultation fees</div>
-              </div>
-            </div>
-            <button class="btn btn-muted w-100 fw-bold py-2 rounded-3">Book Appointment</button>
-          </div>
-        </div>
-
-        <div class="card mb-3 shadow-sm rounded-3">
-          <div class="card-body">
-            <div class="d-flex align-items-start mb-3">
-              <img src="{% static 'images/alex.png' %}" alt="Dr. Alex Anderson" class="rounded-circle me-3 doctor-img">
-              <div class="flex-grow-1">
-                <h5 class="card-title mb-1 fw-bold">Dr. Alex Anderson</h5>
-                <p class="card-text text-muted mb-2">Gynaecologist (8 years Exp)</p>
-                <div class="d-flex align-items-center rating">
-                  <i class="fas fa-star filled me-1"></i>
-                  <i class="fas fa-star filled me-1"></i>
-                  <i class="fas fa-star filled me-1"></i>
-                  <i class="fas fa-star filled me-1"></i>
-                  <i class="fas fa-star filled me-1"></i>
-                  <span class="fw-bold text-dark">5.0</span>
-                </div>
-              </div>
-            </div>
-            <hr class="my-3 border-dashed">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <div>
-                <div class="text-danger fw-bold">Not Available Now</div>
-                <div class="d-flex align-items-center text-muted fs-6">
-                  <i class="fas fa-video text-danger me-1"></i>
-                  <span>Video Consult</span>
-                </div>
-              </div>
-              <div class="text-end">
-                <div class="fw-bold fs-5 text-dark">$60.00</div>
-                <div class="text-muted fs-7">Consultation fees</div>
-              </div>
-            </div>
-            <a href="{% url 'book'%}" class="btn btn-primary w-100 fw-bold py-2 rounded-3 mt-2">Book Appointment</a>
-          </div>
-          </div>
-</main>
-    </div>
+<!-- Page Content -->
+<div class="container-fluid p-0 d-flex justify-content-center">
+  <div class="app-container">
+    <!-- Filter Header -->
+    <section class="d-flex justify-content-between align-items-center p-3 border-bottom bg-light filter-section">
+      <div class="text-secondary fw-semibold">
+        {{ doctors|length }} Doctors Found
       </div>
-  
-  
+      <i class="fas fa-sliders-h fs-5 text-secondary"></i>
+    </section>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Doctor Cards -->
+    <main class="doctor-list p-3">
+      {% for doctor in doctors %}
+      <div class="card mb-3 shadow-sm rounded-3">
+        <div class="card-body">
+          <div class="d-flex align-items-start mb-3">
+
+            
+            <div class="flex-grow-1">
+              <h5 class="card-title mb-1 fw-bold">{{ doctor.name }}</h5>
+              <p class="card-text text-muted mb-2">{{ doctor.specialization }} ({{ doctor.experience }} years Exp)</p>
+              <div class="d-flex align-items-center rating">
+                {% for i in "12345" %}
+                  {% if forloop.counter <= doctor.rating %}
+                    <i class="fas fa-star filled me-1 text-warning"></i>
+                  {% elif doctor.rating|floatformat:1 == forloop.counter0|add:"0.5" %}
+                    <i class="fas fa-star-half-alt filled me-1 text-warning"></i>
+                  {% else %}
+                    <i class="far fa-star me-1 text-muted"></i>
+                  {% endif %}
+                {% endfor %}
+                <span class="fw-bold text-dark ms-1">{{ doctor.rating|floatformat:1 }}</span>
+              </div>
+            </div>
+          </div>
+
+          <hr class="my-3 border-dashed">
+
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+              {% if doctor.is_available %}
+              <div class="text-success fw-bold">Available Now</div>
+              <div class="d-flex align-items-center text-muted fs-6">
+                <i class="fas fa-video text-success me-1"></i>
+                <span>Video Consult</span>
+              </div>
+              {% else %}
+              <div class="text-danger fw-bold">Not Available Now</div>
+              <div class="d-flex align-items-center text-muted fs-6">
+                <i class="fas fa-video text-danger me-1"></i>
+                <span>Video Consult</span>
+              </div>
+              {% endif %}
+            </div>
+            <div class="text-end">
+              <div class="fw-bold fs-5 text-dark">₹{{ doctor.fee }}</div>
+              <div class="text-muted fs-7">Consultation fees</div>
+            </div>
+          </div>
+
+          <a href="{% url 'book' %}?doctor_name={{ doctor.name }}&specialization={{ doctor.specialization }}&hospital={{ doctor.hospital }}&rating={{ doctor.rating }}&fee={{ doctor.fee }}&address={{ doctor.address }}" class="btn btn-primary">Book Appointment</a>
+
+        </div>
+      </div>
+      {% endfor %}
+    </main>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
