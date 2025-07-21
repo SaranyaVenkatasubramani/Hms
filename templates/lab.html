@@ -136,27 +136,7 @@
       <h2>Create Lab Test</h2>
       <form method="POST">
         {% csrf_token %}
-
-        <label for="patient">Patient</label>
-        <select name="patient" id="patient">
-          <option>Mary Alien</option>
-          <option>Harold Green</option>
-          <option>Joseph Clark</option>
-        </select>
-
-        <label for="test_name">Test Name</label>
-        <select name="test_name" id="test_name">
-          <option>Blood Test</option>
-          <option>X-Ray</option>
-          <option>MRI</option>
-        </select>
-
-        <label for="cost">Cost</label>
-        <input type="text" name="cost" placeholder="$">
-
-        <label for="date">Date</label>
-        <input type="date" name="date">
-
+        {{ form.as_p }}
         <button type="submit">Create</button>
       </form>
     </div>
@@ -170,26 +150,19 @@
           <th>Patient</th>
           <th>Date</th>
         </tr>
+        {% for test in recent_tests %}
         <tr>
-          <td>Blood Test</td>
-          <td>Mary Alien</td>
-          <td>12.04.2024</td>
+          <td>{{ test.test_name }}</td>
+          <td>{{ test.patient }}</td>
+          <td>{{ test.date }}</td>
         </tr>
+        {% empty %}
         <tr>
-          <td>X-Ray</td>
-          <td>Harold Green</td>
-          <td>11.04.2024</td>
+          <td colspan="3">No recent lab tests.</td>
         </tr>
-        <tr>
-          <td>MRI</td>
-          <td>Joseph Clark</td>
-          <td>10.04.2024</td>
-        </tr>
+        {% endfor %}
       </table>
     </div>
   </div>
 </body>
 </html>
-
-    
-]
