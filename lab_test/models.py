@@ -1,4 +1,5 @@
 
+
 from django.db import models
 import datetime
 from patients.models import Patient  # Assuming you're using a separate patients app
@@ -16,6 +17,5 @@ class LabTest(models.Model):
     cost = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     date = models.DateField(default=datetime.date.today)
 
-    def __str__(self):
-        return f"{self.test_name} - {self.patient.name}"
-
+    def _str_(self):
+        return f"{self.test_name} - {self.patient.full_name}"
