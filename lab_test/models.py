@@ -2,7 +2,7 @@
 
 from django.db import models
 import datetime
-from patients.models import Patient  # Assuming you're using a separate patients app
+from patients.models import Patient  
 
 class LabTest(models.Model):
     TEST_CHOICES = [
