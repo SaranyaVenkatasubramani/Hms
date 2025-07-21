@@ -159,5 +159,42 @@
         </div>
 
     </div>
+    <div class="header-title">☰ Lab Module</div>
+  </div>
+
+  <div class="main">
+    <!-- Form Section -->
+    <div class="container">
+      <h2>Create Lab Test</h2>
+      <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create</button>
+      </form>
+    </div>
+
+    <!-- Table Section -->
+    <div class="container">
+      <h2>Recent Test</h2>
+      <table>
+        <tr>
+          <th>Test Name</th>
+          <th>Patient</th>
+          <th>Date</th>
+        </tr>
+        {% for test in recent_tests %}
+        <tr>
+          <td>{{ test.test_name }}</td>
+          <td>{{ test.patient }}</td>
+          <td>{{ test.date }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="3">No recent lab tests.</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
 </body>
 </html>
