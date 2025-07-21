@@ -44,7 +44,7 @@ def redirect_user_dashboard(request):
     if user.role == 'superadmin':
         return render(request, 'admin.html')
     elif user.role == 'receptionist':
-        return render(request, 'dashboards/reception_dashboard.html')
+        return render(request, 'prescription.html')
     elif user.role == 'doctor':
         return render(request, 'docdashboard.html')
     elif user.role == 'labtech':
