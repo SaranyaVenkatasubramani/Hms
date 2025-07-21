@@ -6,15 +6,8 @@ from .models import Patient
 from django.shortcuts import get_object_or_404
 from .forms import RescheduleForm
 from django.contrib import messages
-
-
-
 import uuid
 
-def patient_dashboard(request):
-    return render(request,'patient_dashboard.html')
-def doctor(request):
-    return render(request,'doctor.html')
 
 @login_required
 def book_appointment(request):
@@ -22,35 +15,82 @@ def book_appointment(request):
         doctor_name = request.POST.get('doctor_name')
         consultation_type = request.POST.get('consultation_type')
         date = request.POST.get('date')
-        time_str = request.POST.get('scheduled_time')  
+        time_str = request.POST.get('scheduled_time')
+
+        specialization = request.POST.get('specialization')
+        hospital = request.POST.get('hospital')
+        rating = request.POST.get('rating')
+        fee = request.POST.get('fee')
+        address = request.POST.get('address')
 
         if not doctor_name or not consultation_type or not date or not time_str:
             return render(request, 'book.html', {
-                'error': 'Please fill in all required fields.'
+                'error': 'Please fill in all required fields.',
+                'doctor_name': doctor_name,
+                'specialization': specialization,
+                'hospital': hospital,
+                'rating': rating,
+                'fee': fee,
+                'address': address
             })
 
         try:
-            # Parse the time string to a proper time object
             scheduled_time = datetime.strptime(time_str, "%H:%M").time()
         except ValueError:
             return render(request, 'book.html', {
-                'error': 'Invalid time format. Please choose a time from the dropdown.'
+                'error': 'Invalid time format. Please choose a time from the dropdown.',
+                'doctor_name': doctor_name,
+                'specialization': specialization,
+                'hospital': hospital,
+                'rating': rating,
+                'fee': fee,
+                'address': address
             })
 
-        # Save to DB
+        try:
+            patient = Patient.objects.get(user=request.user)
+        except Patient.DoesNotExist:
+            return render(request, 'book.html', {
+                'error': 'Patient profile not found.',
+                'doctor_name': doctor_name
+            })
+
         Appointment.objects.create(
-            patient=request.user,
+            patient=patient,
             doctor_name=doctor_name,
             consultation_type=consultation_type,
             date=date,
             scheduled_time=scheduled_time,
-            status='Scheduled',  # You may want to set a default status
+            status='Scheduled',
             video_link="https://example.com/video123" if consultation_type == "Video" else ""
         )
 
         return redirect('patient_details_form')
 
-    return render(request, 'book.html')
+    # For GET requests
+    doctor_name = request.GET.get('doctor_name', '')
+    specialization = request.GET.get('specialization', '')
+    hospital = request.GET.get('hospital', '')
+    rating = request.GET.get('rating', '')
+    fee = request.GET.get('fee', '')
+    address = request.GET.get('address', '')
+    
+
+    return render(request, 'book.html', {
+        'doctor_name': doctor_name,
+        'specialization': specialization,
+        'hospital': hospital,
+        'rating': rating,
+        'fee': fee,
+        'address': address
+    })
+
+
+def patient_dashboard(request):
+    return render(request,'patient_dashboard.html')
+def doctor(request):
+    return render(request,'doctor.html')
+
 
 
 def patient_login(request):
