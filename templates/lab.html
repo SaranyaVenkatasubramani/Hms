@@ -1,200 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Create Lab Test</title>
-    <style>
-        body {
-            background-color: #add8e6;
-            font-family: Arial, sans-serif;
-        }
-        .main-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px;
-        }
-        .container {
-            width: 90%;
-            max-width: 500px;
-            background: #fff;
-            padding: 30px;
-            margin-bottom: 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 12px rgba(0,0,0,0.1);
-        }
-        .table-container {
-            width: 90%;
-            max-width: 900px;
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 12px rgba(0,0,0,0.1);
-        }
-        label {
-            font-weight: bold;
-            margin-top: 10px;
-            display: block;
-        }
-        input, select {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .btn {
-            background-color: #0052cc;
-            color: white;
-            padding: 12px;
-            width: 100%;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .btn:hover {
-            background-color: #003d99;
-        }
-        .error {
-            color: red;
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-        .alert {
-            color: green;
-            font-size: 16px;
-            margin-bottom: 15px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        h2 {
-            margin-bottom: 10px;
-            color: #333;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Create Lab Test</title>
+  <style>
+    body {
+      background-color: #add8e6;
+      font-family: Arial, sans-serif;
+    }
+    .main-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+    }
+    .container {
+      width: 90%;
+      max-width: 500px;
+      background: #fff;
+      padding: 30px;
+      margin-bottom: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 6px;
+      margin-top: 14px;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .btn {
+      background-color: #0052cc;
+      color: white;
+      padding: 12px;
+      width: 100%;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #003d99;
+    }
+    .table-container {
+      width: 90%;
+      max-width: 900px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .error {
+      color: red;
+    }
+    .alert {
+      color: green;
+    }
+  </style>
 </head>
 <body>
-    <div class="main-wrapper">
+<div class="main-wrapper">
 
-        <!-- Form Section -->
-        <div class="container">
-            <h2>Create Lab Test</h2>
+  <!-- Form Section -->
+  <div class="container">
+    <h2>Create Lab Test</h2>
 
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert">{{ message }}</div>
-                {% endfor %}
-            {% endif %}
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
 
-            {% if form.errors %}
-            <div class="error">
-                <ul>
-                    {% for field in form %}
-                        {% for error in field.errors %}
-                            <li><strong>{{ field.label }}:</strong> {{ error }}</li>
-                        {% endfor %}
-                    {% endfor %}
-                </ul>
-            </div>
-            {% endif %}
+    {% if form.errors %}
+      <div class="error">
+        <ul>
+          {% for field in form %}
+            {% for error in field.errors %}
+              <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+            {% endfor %}
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
 
-            <form method="POST">
-                {% csrf_token %}
-                <label for="{{ form.patient.id_for_label }}">Patient</label>
-                {{ form.patient }}
+    <form method="POST">
+      {% csrf_token %}
 
-                <label for="{{ form.test_name.id_for_label }}">Test Name</label>
-                {{ form.test_name }}
+      <select name="patient" id="id_patient" required>
+  <option value="">-- Select Patient --</option>
+  {% for patient in patients %}
+    <option value="{{ patient.id }}">{{ patient.full_name }}</option>
+  {% endfor %}
+</select>
 
-                <label for="{{ form.cost.id_for_label }}">Cost</label>
-                {{ form.cost }}
 
-                <label for="{{ form.date.id_for_label }}">Date</label>
-                {{ form.date }}
+      <label for="id_test_name">Test Name</label>
+      <select name="test_name" id="id_test_name" required>
+        <option value="">-- Select Test --</option>
+        <option value="Blood Test">Blood Test</option>
+        <option value="X-Ray">X-Ray</option>
+        <option value="MRI">MRI</option>
+      </select>
 
-                <button type="submit" class="btn">Create</button>
-            </form>
-        </div>
+      <label for="id_cost">Cost</label>
+      <input type="number" step="0.01" name="cost" id="id_cost" required>
 
-        <!-- Existing Tests Table -->
-        <div class="table-container">
-            <h2>All Lab Tests</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Patient</th>
-                        <th>Test Name</th>
-                        <th>Cost</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for test in recent_tests %}
-                        <tr>
-                            <td>{{ test.patient }}</td>
-                            <td>{{ test.test_name }}</td>
-                            <td>{{ test.cost }}</td>
-                            <td>{{ test.date }}</td>
-                        </tr>
-                    {% empty %}
-                        <tr>
-                            <td colspan="4">No lab tests available.</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+      <label for="id_date">Date</label>
+      <input type="date" name="date" id="id_date" required>
 
-    </div>
-    <div class="header-title">☰ Lab Module</div>
+      <button type="submit" class="btn">Create</button>
+    </form>
   </div>
 
-  <div class="main">
-    <!-- Form Section -->
-    <div class="container">
-      <h2>Create Lab Test</h2>
-      <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Create</button>
-      </form>
-    </div>
-
-    <!-- Table Section -->
-    <div class="container">
-      <h2>Recent Test</h2>
-      <table>
+  <!-- Lab Tests Table -->
+  <div class="table-container">
+    <h2>All Lab Tests</h2>
+    <table>
+      <thead>
         <tr>
-          <th>Test Name</th>
           <th>Patient</th>
+          <th>Test Name</th>
+          <th>Cost</th>
           <th>Date</th>
         </tr>
-        {% for test in recent_tests %}
-        <tr>
-          <td>{{ test.test_name }}</td>
-          <td>{{ test.patient }}</td>
-          <td>{{ test.date }}</td>
-        </tr>
-        {% empty %}
-        <tr>
-          <td colspan="3">No recent lab tests.</td>
-        </tr>
+      </thead>
+      <tbody>
+        {% for test in tests %}
+          <tr>
+            <td>{{ test.patient.full_name }}</td>
+            <td>{{ test.test_name }}</td>
+            <td>{{ test.cost }}</td>
+            <td>{{ test.date }}</td>
+          </tr>
+        
         {% endfor %}
-      </table>
-    </div>
+      </tbody>
+    </table>
   </div>
+
+</div>
 </body>
 </html>

@@ -1,17 +1,17 @@
 from django import forms
 from .models import LabTest
+from patients.models import Patient
 
 class LabTestForm(forms.ModelForm):
     class Meta:
         model = LabTest
         fields = ['patient', 'test_name', 'cost', 'date']
-        widgets = {
-            'patient': forms.Select(attrs={'class': 'form-select'}),
-            'test_name': forms.Select(attrs={'class': 'form-select'}),
-            'cost': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '$'}),
-            'date': forms.DateInput(attrs={
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['patient'].queryset = Patient.objects.all()
+        for field in self.fields.values():
+            field.widget.attrs.update({
                 'class': 'form-control',
-                'placeholder': 'dd - mm - yyyy',
-                'type': 'date'
-            }),
-        }
+                'style': 'margin-bottom: 15px; padding: 10px; width: 100%;'
+            })
