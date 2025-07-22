@@ -60,11 +60,12 @@ def redirect_user_dashboard(request):
     else:
         return redirect('login')
 
-def forgot_password(request):
-    return render(request,'fpass.html')
 
-def settings(request):
-    return render(request,'settings.html')
+
+@login_required
+def user_settings(request):
+    user = request.user
+    return render(request, 'settings.html', {'user': user})
 
 def logout_view(request):
     logout(request)
