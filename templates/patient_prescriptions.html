@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Prescriptions</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background: url("{% static 'images/bg2.jpg' %}") no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Poppins', sans-serif;
+      padding: 120px 0;
+      color: white;
+      min-height: 700px;
+    }
+
+    .header {
+      text-align: center;
+      padding: 25px 0 10px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    .card-prescription {
+      background-color: white;
+      border-radius: 30px;
+      padding: 20px;
+      margin: 20px auto;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+      width: 90%;
+      max-width: 550px;
+    }
+
+    .card-prescription h5 {
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #34495e;
+    }
+
+    .card-prescription p {
+      font-size: 14px;
+      margin: 5px 0;
+      color: #555;
+    }
+
+    .label {
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .footer-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: white;
+      border-top: 1px solid #ddd;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      box-shadow: 0 -1px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .footer-nav a {
+      color: #888;
+      text-decoration: none;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .footer-nav a i {
+      font-size: 18px;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .footer-nav a.active {
+      color: #0d6efd;
+    }
+
+        .navbar {
+      background-color: #ABD9F1 !important;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 15px 0;
+    }
+
+    .navbar .logo span {
+      color: black;
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    .navbar .nav-link {
+      color: #003366 !important;
+      font-weight: 600;
+    }
+
+    .navbar .nav-link:hover,
+    .navbar .nav-link.active {
+      color: gray !important;
+    }
+     
+    
+    @media (min-width: 768px) {
+      .footer-nav {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center logo">
+      <img src="{% static 'images/logo.png' %}" alt="Logo" style="height: 40px; margin-right: 10px;" />
+      <span>INSTACARE</span>
+    </div>
+    <ul class="nav d-none d-lg-flex">
+      <li class="nav-item"><a href="{% url 'homepage' %}" class="nav-link">HOME</a></li>
+      <li class="nav-item"><a href="{% url 'doctor' %}" class="nav-link">DOCTORS</a></li>
+      <li class="nav-item"><a href="{% url 'appointment_dashboard' %}" class="nav-link active">MY APPOINTMENTS</a></li>
+      <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">LOGOUT</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="header">My Prescriptions</div>
+
+{% if prescriptions %}
+  {% for p in prescriptions %}
+    <div class="card-prescription">
+      <h5>Prescribed by Dr. {{ p.doctor.username }} {{ p.doctor.last_name }}</h5>
+      <p><span class="label">Date:</span> {{ p.date_created|date:"d M Y, H:i" }}</p>
+      <p><span class="label">Symptoms:</span> {{ p.symptoms }}</p>
+      <p><span class="label">Diagnosis:</span> {{ p.diagnosis }}</p>
+      <p><span class="label">Medications:</span> {{ p.medications }}</p>
+      {% if p.notes %}
+        <p><span class="label">Notes:</span> {{ p.notes }}</p>
+      {% endif %}
+    </div>
+  {% endfor %}
+{% else %}
+  <p class="text-center text-light mt-5">No prescriptions found yet.</p>
+{% endif %}
+
+<!-- Bottom Navigation -->
+<div class="footer-nav bottom-nav">
+  <a href="{% url 'homepage' %}"><i class="fas fa-home"></i>Home</a>
+  <a href="#" class="active"><i class="fas fa-file-medical-alt"></i>Prescriptions</a>
+  <a href="#"><i class="fas fa-cog"></i>Settings</a>
+  <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
+</div>
+
+</body>
+</html>
