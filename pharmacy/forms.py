@@ -1,14 +1,20 @@
 from django import forms
-from .models import PharmacyItem, DispensedMedicine
+from .models import PharmacyItem
 
-class InventoryForm(forms.ModelForm):
+class PharmacyItemForm(forms.ModelForm):
     class Meta:
         model = PharmacyItem
-        fields = ['name', 'quantity', 'expiry_date']
+        fields = ['name', 'quantity']
+        widgets = {   
+            'name': forms.TextInput(attrs={
+                'placeholder': 'Enter drug name',
+                'class': 'form-control'
+            }),
+            'quantity': forms.NumberInput(attrs={
+                'placeholder': 'Enter quantity',
+                'class': 'form-control'
+            }),
+        }     
 
-class DispenseMedicineForm(forms.ModelForm):
-    class Meta:
-        model = DispensedMedicine
-        fields = ['prescription_id', 'pharmacy_item', 'quantity_dispensed']
 
 

@@ -52,9 +52,9 @@ def redirect_user_dashboard(request):
     elif user.role == 'doctor':
         return redirect('doctor_dashboard')
     elif user.role == 'labtech':
-        return render(request, 'lab.html')
+        return redirect('/lab/dashboard/')
     elif user.role == 'pharmacist':
-        return render(request, 'pharmacy.html')
+        return redirect('/pharmacy/pharmacy/')
     elif user.role == 'patient':
         return render(request, 'patient_dashboard.html')
     else:

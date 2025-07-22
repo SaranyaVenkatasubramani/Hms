@@ -1,34 +1,19 @@
 
-
 from django.shortcuts import render, redirect
-from .forms import InventoryForm
-from .models import PharmacyItem, DispensedMedicine
-from .forms import InventoryForm, DispenseMedicineForm
+from .forms import PharmacyItemForm
+from .models import PharmacyItem
 
-def pharmacy_home(request):
-    inventory = PharmacyItem.objects.all()
-    prescriptions = DispensedMedicine.objects.all()
-    inventory_form = InventoryForm()
-    dispense_form = DispenseMedicineForm()
+def pharmacy_view(request):
+    if request.method == 'POST':
+        form = PharmacyItemForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('pharmacy')
+    else:
+        form = PharmacyItemForm()
+
+    inventory = PharmacyItem.objects.all().order_by('-added_on')  # Fetch from DB
     return render(request, 'pharmacy.html', {
-        'inventory': inventory,
-        'prescriptions': prescriptions,
-        'inventory_form': inventory_form,
-        'dispense_form': dispense_form
+        'form': form,
+        'inventory': inventory
     })
-
-def add_inventory_item(request):
-    if request.method == 'POST':
-        form = InventoryForm(request.POST)
-        if form.is_valid():
-            form.save()
-    return redirect('pharmacy-home')
-def dispense_medicine(request):
-    if request.method == 'POST':
-        form = DispenseMedicineForm(request.POST)
-        if form.is_valid():
-            form.save()
-    return redirect('pharmacy-home')
-
-
-
