@@ -172,11 +172,15 @@
     <!-- Inventory Page -->
     <div id="inventory" class="section active">
       <h2>INVENTORY</h2>
-      <div class="search-add">
-        <input type="text" placeholder="Search......">
-        <button class="add-btn">Add item</button>
-      </div>
+      <form method="POST">
+         {% csrf_token %}
 
+    <div class="search-add">
+  <div>{{ form.name }}</div>
+  <div>{{ form.quantity }}</div>
+  <button type="submit" class="add-btn">Add item</button>
+</div>
+     
       <table>
         <thead>
           <tr>
@@ -185,9 +189,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>Aspirin</td><td>50</td></tr>
-          <tr><td>Amoxicillin</td><td>75</td></tr>
-          <tr><td>Lisinopril</td><td>65</td></tr>
+          {% for item in inventory %}
+            <tr>
+              <td>{{ item.name }}</td>
+              <td>{{ item.quantity }}</td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="2">No items in inventory.</td>
+            </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>
