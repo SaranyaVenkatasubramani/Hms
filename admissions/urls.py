@@ -8,7 +8,8 @@ urlpatterns = [
     path('appointlist/',views.appointment,name='appointment'), 
       path('system/', views.system_settings_view, name='system_settings'),
     path('ward/', views.ward_management_view, name='ward_management'),
-    path('settings/', views.settings_view, name='settings'),# Loads at /admissions/
+     path('ward/icu/', views.icu_page, name='icu'),
+
 ]
 
 

@@ -12,5 +12,6 @@ def system_settings_view(request):
 def ward_management_view(request):
     return render(request, 'ward_management.html')
 
-def settings_view(request):
-    return render(request, 'settings.html')
+
+def icu_page(request):
+    return render(request, 'ICU.html')
