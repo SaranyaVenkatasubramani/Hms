@@ -7,83 +7,31 @@ from django.shortcuts import get_object_or_404
 from .forms import RescheduleForm
 from django.contrib import messages
 import uuid
-
+from user.models import CustomUser
 
 @login_required
 def book_appointment(request):
     if request.method == 'POST':
+        # collect form data
         doctor_name = request.POST.get('doctor_name')
         consultation_type = request.POST.get('consultation_type')
         date = request.POST.get('date')
         time_str = request.POST.get('scheduled_time')
 
-        specialization = request.POST.get('specialization')
-        hospital = request.POST.get('hospital')
-        rating = request.POST.get('rating')
-        fee = request.POST.get('fee')
-        address = request.POST.get('address')
+        return redirect(f"/patients/patient_form/?doctor_name={doctor_name}&consultation_type={consultation_type}&date={date}&scheduled_time={time_str}")
 
-        if not doctor_name or not consultation_type or not date or not time_str:
-            return render(request, 'book.html', {
-                'error': 'Please fill in all required fields.',
-                'doctor_name': doctor_name,
-                'specialization': specialization,
-                'hospital': hospital,
-                'rating': rating,
-                'fee': fee,
-                'address': address
-            })
 
-        try:
-            scheduled_time = datetime.strptime(time_str, "%H:%M").time()
-        except ValueError:
-            return render(request, 'book.html', {
-                'error': 'Invalid time format. Please choose a time from the dropdown.',
-                'doctor_name': doctor_name,
-                'specialization': specialization,
-                'hospital': hospital,
-                'rating': rating,
-                'fee': fee,
-                'address': address
-            })
-
-        try:
-            patient = Patient.objects.get(user=request.user)
-        except Patient.DoesNotExist:
-            return render(request, 'book.html', {
-                'error': 'Patient profile not found.',
-                'doctor_name': doctor_name
-            })
-
-        Appointment.objects.create(
-            patient=patient,
-            doctor_name=doctor_name,
-            consultation_type=consultation_type,
-            date=date,
-            scheduled_time=scheduled_time,
-            status='Scheduled',
-            video_link="https://example.com/video123" if consultation_type == "Video" else ""
-        )
-
-        return redirect('patient_details_form')
-
-    # For GET requests
-    doctor_name = request.GET.get('doctor_name', '')
-    specialization = request.GET.get('specialization', '')
-    hospital = request.GET.get('hospital', '')
-    rating = request.GET.get('rating', '')
-    fee = request.GET.get('fee', '')
-    address = request.GET.get('address', '')
     
-
+    # for GET, show form
     return render(request, 'book.html', {
-        'doctor_name': doctor_name,
-        'specialization': specialization,
-        'hospital': hospital,
-        'rating': rating,
-        'fee': fee,
-        'address': address
+        'doctor_name': request.GET.get('doctor_name', ''),
+        'specialization': request.GET.get('specialization', ''),
+        'hospital': request.GET.get('hospital', ''),
+        'rating': request.GET.get('rating', ''),
+        'fee': request.GET.get('fee', ''),
+        'address': request.GET.get('address', '')
     })
+
 
 
 def patient_dashboard(request):
@@ -100,6 +48,7 @@ def patient_login(request):
 @login_required
 def patient_info_view(request):
     if request.method == 'POST':
+        # Patient info from form
         full_name = request.POST.get('full_name')
         address = request.POST.get('address')
         dob = request.POST.get('dob')
@@ -108,30 +57,66 @@ def patient_info_view(request):
         emergency_name = request.POST.get('emergency_contact')
         emergency_number = request.POST.get('emergency_number')
 
-        # Generate unique patient ID
-        patient_id = str(uuid.uuid4())
+        # Appointment info from hidden fields
+        doctor_name = request.POST.get('doctor_name')
+        consultation_type = request.POST.get('consultation_type')
+        date = request.POST.get('date')
+        scheduled_time = request.POST.get('scheduled_time')
 
-        # Save to DB
-        Patient.objects.create(
+        # Create or update patient
+        patient_obj, created = Patient.objects.get_or_create(
             user=request.user,
-            full_name=full_name,
-            address=address,
-            dob=dob,
-            medical_history=medical_history,
-            allergies=allergies,
-            emergency_contact_name=emergency_name,
-            emergency_contact_number=emergency_number,
-            qr_code=patient_id,
+            defaults={
+                'full_name': full_name,
+                'address': address,
+                'dob': dob,
+                'medical_history': medical_history,
+                'allergies': allergies,
+                'emergency_contact_name': emergency_name,
+                'emergency_contact_number': emergency_number,
+                'qr_code': str(uuid.uuid4()),
+            }
         )
 
-        return redirect('patient_dashboard')  # change to your actual dashboard
+        # Get doctor object
+        doctor = CustomUser.objects.filter(first_name=doctor_name, role='doctor').first()
 
-    return render(request, 'patient_form.html')
 
+        if not doctor:
+            messages.error(request, 'Doctor not found.')
+            return redirect('book')  # or handle differently
+
+        # Create Appointment
+        Appointment.objects.create(
+            patient=request.user,
+            doctor=doctor,
+            consultation_type=consultation_type,
+            date=date,
+            scheduled_time=scheduled_time,
+            status='Scheduled',
+            video_link="https://example.com/video123" if consultation_type == "Video" else ""
+        )
+
+        return redirect('appointment_dashboard')
+
+    # If GET, get appointment data from query params
+    return render(request, 'patient_form.html', {
+        'doctor_name': request.GET.get('doctor_name', ''),
+        'consultation_type': request.GET.get('consultation_type', ''),
+        'date': request.GET.get('date', ''),
+        'scheduled_time': request.GET.get('scheduled_time', '')
+    })
 
 @login_required
 def appointment_dashboard(request):
-    appointments = Appointment.objects.filter(patient=request.user).order_by('-date')
+    user = request.user
+    if user.role == 'patient':
+        appointments = Appointment.objects.filter(patient=user).order_by('-date', '-scheduled_time')
+    elif user.role == 'doctor':
+        appointments = Appointment.objects.filter(doctor=user).order_by('-date', '-scheduled_time')
+    else:
+        appointments = Appointment.objects.none()  # or show all if admin/superadmin
+
     return render(request, 'appointment_dashboard.html', {'appointments': appointments})
 
 

@@ -1,6 +1,5 @@
 from django.contrib import admin
-from .models import Patient
-from .models import Appointment
+from .models import Patient, Appointment
 
 @admin.register(Patient)
 class PatientAdmin(admin.ModelAdmin):
@@ -28,5 +27,11 @@ class AppointmentAdmin(admin.ModelAdmin):
         'video_link'
     )
     list_filter = ('consultation_type', 'date', 'status')
-    search_fields = ('patient__username', 'doctor_name')
+    search_fields = ('patient__username', 'doctor__username')
     ordering = ('-date', 'scheduled_time')
+
+    def doctor_name(self, obj):
+        return obj.doctor.get_full_name() if obj.doctor else "-"
+    doctor_name.short_description = 'Doctor Name'
+
+

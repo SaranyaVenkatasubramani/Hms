@@ -8,6 +8,10 @@ from django.contrib.auth import logout
 def homepage(request):
     return render(request, 'index.html')
 
+def get_full_name(self):
+    return f"{self.first_name} {self.last_name}".strip()
+
+
 
 def user_login(request):
     if request.method == 'POST':
@@ -46,7 +50,7 @@ def redirect_user_dashboard(request):
     elif user.role == 'receptionist':
         return render(request, 'prescription.html')
     elif user.role == 'doctor':
-        return render(request, 'docdashboard.html')
+        return redirect('doctor_dashboard')
     elif user.role == 'labtech':
         return render(request, 'lab.html')
     elif user.role == 'pharmacist':

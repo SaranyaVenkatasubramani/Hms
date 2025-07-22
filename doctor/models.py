@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from user.models import CustomUser 
 
 class Doctor(models.Model):
     name = models.CharField(max_length=100)

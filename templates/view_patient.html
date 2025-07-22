@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Patient Details</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background: url("{% static 'images/bg2.jpg' %}") center/cover no-repeat fixed;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .container-box {
+      max-width: 800px;
+      margin: 60px auto;
+      background-color: #eef;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+    h2 {
+      color: #320d99;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .info-label {
+      font-weight: bold;
+      color: #003f88;
+    }
+    .info-value {
+      margin-bottom: 15px;
+    }
+    .qr-section {
+      text-align: center;
+      margin-top: 30px;
+    }
+    .btn-back {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container-box">
+    <h2>Patient Profile: {{ patient.full_name }}</h2>
+
+    <div class="info-value">
+      <span class="info-label">Username:</span> {{ patient.user.username }}
+    </div>
+    <div class="info-value">
+      <span class="info-label">Email:</span> {{ patient.user.email }}
+    </div>
+    <div class="info-value">
+      <span class="info-label">Date of Birth:</span> {{ patient.dob }}
+    </div>
+    <div class="info-value">
+      <span class="info-label">Address:</span> {{ patient.address }}
+    </div>
+    <div class="info-value">
+      <span class="info-label">Medical History:</span> {{ patient.medical_history|default:"N/A" }}
+    </div>
+    <div class="info-value">
+      <span class="info-label">Allergies:</span> {{ patient.allergies|default:"None" }}
+    </div>
+    <div class="info-value">
+      <span class="info-label">Emergency Contact:</span> {{ patient.emergency_contact_name }} ({{ patient.emergency_contact_number }})
+    </div>
+
+    <div class="qr-section">
+      <span class="info-label">QR Code ID:</span> {{ patient.qr_code }}
+    </div>
+
+    <a href="{% url 'doctor_dashboard' %}" class="btn btn-primary btn-back">← Back to Dashboard</a>
+  </div>
+
+</body>
+</html>
