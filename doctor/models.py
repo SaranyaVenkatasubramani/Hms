@@ -1,5 +1,7 @@
 from django.db import models
 from user.models import CustomUser 
+from django.contrib.auth.decorators import login_required
+from pharmacy.models import Prescription
 
 class Doctor(models.Model):
     name = models.CharField(max_length=100)
@@ -14,3 +16,4 @@ class Doctor(models.Model):
 
     def __str__(self):
         return self.name
+

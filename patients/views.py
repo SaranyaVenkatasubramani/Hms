@@ -8,6 +8,7 @@ from .forms import RescheduleForm
 from django.contrib import messages
 import uuid
 from user.models import CustomUser
+from pharmacy.models import Prescription
 
 @login_required
 def book_appointment(request):
@@ -142,3 +143,18 @@ def reschedule_appointment(request, appointment_id):
 
     return render(request, 'reschedule.html', {'appointment': appointment})
 
+from pharmacy.models import Prescription
+
+def view_prescriptions(request):
+    patient = request.user.patient  # assumes you're using a Patient model linked to CustomUser
+    prescriptions = Prescription.objects.filter(patient=patient).order_by('-date_created')
+
+    return render(request, 'patient_prescriptions.html', {
+        'prescriptions': prescriptions
+    })
+@login_required
+def payment(request):
+    return render(request, 'payment.html')
+@login_required
+def proceed_payment(request):
+    return render(request, 'proceed_payment.html')

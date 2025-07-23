@@ -174,13 +174,13 @@
       <h2>INVENTORY</h2>
       <form method="POST">
          {% csrf_token %}
+         <div class="search-add">
+           <div>{{ form.name }}</div>
+           <div>{{ form.quantity }}</div>
+           <button type="submit" class="add-btn">Add item</button>
+         </div>
+      </form>
 
-    <div class="search-add">
-  <div>{{ form.name }}</div>
-  <div>{{ form.quantity }}</div>
-  <button type="submit" class="add-btn">Add item</button>
-</div>
-     
       <table>
         <thead>
           <tr>
@@ -203,7 +203,7 @@
       </table>
     </div>
 
-    <!-- Prescriptions Page -->
+    <!-- Prescriptions Page (Updated) -->
     <div id="prescriptions" class="section">
       <div class="bill-section">
         <h2>PRESCRIPTIONS</h2>
@@ -212,15 +212,38 @@
       <table>
         <thead>
           <tr>
-            <th>Patient</th>
-            <th>Doctor</th>
-            <th>Date</th>
+             <th>Patient</th>
+             <th>Doctor</th>
+             <th>Medications</th>
+             <th>Prescribed On</th>
+             <th>Price</th>
+             <th>Billing Status</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td>Charles Harr’s</td><td><b>Dr. John Smith</b></td><td>12.04.2024</td></tr>
-          <tr><td>Anna Moore</td><td><b>Dr. John Smith</b></td><td>09.04.2024</td></tr>
-          <tr><td>James Lee</td><td><b>Dr. Sarah Miller</b></td><td>09.04.2024</td></tr>
+          {% for p in prescriptions %}
+            <tr>
+              <td>{{ p.patient.full_name }}</td>
+        <td>{{ p.doctor.username }}</td>
+        <td>{{ p.medications }}</td>
+        <td>{{ p.date_created|date:"d.m.Y" }}</td>
+            <td>
+          <input type="number" name="price_{{ p.id }}" class="form-control" placeholder="₹0.00">
+        </td>
+        <td>
+          <select name="billing_{{ p.id }}" class="form-select">
+            <option value="pending">Pending</option>
+            <option value="paid">Paid</option>
+          </select>
+        </td>
+
+
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="3">No prescriptions available.</td>
+            </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>

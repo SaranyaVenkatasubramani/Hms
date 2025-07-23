@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Write Prescription</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background: url("{% static 'images/doc.jpg' %}") center/cover no-repeat fixed;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container-box {
+      max-width: 700px;
+      margin: 60px auto;
+      background-color: rgba(163, 210, 243, 0.95);
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+    h2 {
+      text-align: center;
+      color: #003366;
+      font-weight: bold;
+      margin-bottom: 25px;
+    }
+    .form-label {
+      font-weight: bold;
+      color: #003f88;
+    }
+    textarea, input {
+      border-radius: 6px !important;
+    }
+    .btn-submit {
+      background-color: #0044cc;
+      color: white;
+      font-weight: bold;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+    }
+    .btn-back {
+      margin-top: 20px;
+      display: block;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container-box">
+    <h2>Write Prescription for {{ patient.name }}</h2>
+
+    <form method="POST">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label class="form-label">Symptoms</label>
+        {{ form.symptoms }}
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Diagnosis</label>
+        {{ form.diagnosis }}
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Medications</label>
+        {{ form.medications }}
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Notes</label>
+        {{ form.notes }}
+      </div>
+
+      <button type="submit" class="btn btn-submit">Save Prescription</button>
+    </form>
+
+    <div class="btn-back">
+      <a href="{% url 'doctor_dashboard' %}" class="btn btn-outline-secondary">← Back to Dashboard</a>
+    </div>
+  </div>
+
+</body>
+</html>
