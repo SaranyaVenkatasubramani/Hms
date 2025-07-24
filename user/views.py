@@ -102,3 +102,5 @@ def logout_view(request):
     return redirect('homepage')  
 
 
+def about_us(request):
+    return render(request, 'about_us.html')
